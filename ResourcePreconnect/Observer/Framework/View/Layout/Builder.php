@@ -29,31 +29,25 @@ class Builder implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        $ResourcePreconnect = [
+        $ResourceHints = [
             'google' => [
-                'resource' => 'https://www.google-analytics.com',
+                'resource' => 'https://www.googletagmanager.com/gtag/js?id=G-E35X2T4CP3&l=dataLayer&cx=c',
                 'type'     => 'preconnect',
-            ],
-            'hs-analytics' => [
-                'resource' => 'https://js-eu1.hs-analytics.net',
-                'type'     => 'preconnect'
+                'as' => 'script',
             ],
             'hotjar-scripts' => [
-                'resource' => 'https://script.hotjar.com',
+                'resource' => 'https://script.hotjar.com/modules.b738078c6419b4df4360.js',
                 'type'     => 'preconnect',
-            ],
-            'hotjar-static' => [
-                'resource' => 'https://static.hotjar.com',
-                'type'     => 'preconnect',
+                'as' => 'script',
             ]
         ];
 
-        foreach ($ResourcePreconnect as $resource) {
+        foreach ($ResourceHints as $resource) {
             $this->pageConfig->addRemotePageAsset(
                 $resource['resource'],
                 'link_rel',
                 [
-                    'attributes' => ['rel' => $resource['type'] ]
+                    'attributes' => ['rel' => $resource['type'] ,'as' => $resource['as'] ]
                 ]
             );
         }
